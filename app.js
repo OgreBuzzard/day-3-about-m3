@@ -18,7 +18,7 @@ while (beginLower !== 'yes' && beginLower !== 'y') {
 }
 
 // ask second y/n question, create variable
-var french = prompt('Hey! We already got one question out of the way. Only four more to go. Does Matt Harding speak French fluently?');
+var french = prompt('Hey! We already got one question out of the way. Onto the next one. Does Matt Harding speak French fluently?');
 console.log('French:', french);
 
 // convert second answer to lower case, create new variable
@@ -72,3 +72,37 @@ if (airplaneLower === 'yes' || airplaneLower === 'y') {
 } else {
   alert('This is another one where Matt Harding is really not sure. His paper airplane skills are middling, but he has no idea where yours are at, so this one could go either way. The fact that you said no suggests you make a pretty mean paper airplane, in which case you\'re probably right that you\'d beat him. Again, you\'re welcome to challenge him. He is totally up for finding out.');
 }
+
+//create vars for marshmallow and number of tries
+var marshmallows;
+var counter = 0;
+
+// ask user to guess a number
+while (marshmallows !== 6 && counter < 4) {
+  marshmallows = parseInt(prompt('How many standard-sized marshmallows can I fit in my mouth without chewing or swallowing?'));
+  // if it's too low
+  if (marshmallows < 6) {
+    alert('Come on. I can fit more than that. Try a higher number.');
+    counter++;
+  // if it's too high
+  } else if (marshmallows > 6) {
+    alert('This is not worth dying over. Too high. Try a lower number.');
+    counter++;
+  // if they type a word or enter nothing
+  } else if (marshmallows.isNaN() || marshmallows === null) {
+    alert('You\'ve gotta put a number in. Try again.');
+    counter++;
+  }
+
+  // guessed right
+  if (marshmallows === 6) {
+    alert('Yes. Six marshmallows. No more, no less. Well, I mean, sure, I could fit fewer marshmallows in my mouth, but 6 is the most.');
+  }
+
+  // ran out of tries
+  if (counter >= 4) {
+    alert('Time\'s up. You\'re out of tries. Incidentally, it was 6.');
+  }
+}
+
+console.log('Counter:', counter);
