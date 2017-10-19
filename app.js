@@ -119,37 +119,72 @@ airplaneQuestion();
 var marshmallows;
 var guessesMarsh = 0;
 
-// ask user to guess a number
-while (marshmallows !== 6 && guessesMarsh < 4) {
-  marshmallows = parseInt(prompt('How many standard-sized marshmallows can I fit in my mouth without chewing or swallowing?'));
-  // if it's too low
-  if (marshmallows < 6) {
-    alert('Come on. I can fit more than that. Try a higher number.');
-    guessesMarsh++;
-  // if it's too high
-  } else if (marshmallows > 6) {
-    alert('This is not worth dying over. Too high. Try a lower number.');
-    guessesMarsh++;
-  // if they type a word or enter nothing
-  } else if (isNaN(marshmallows) || marshmallows === null) {
-    alert('You\'ve gotta put a number in. Try again.');
-    guessesMarsh++;
+function marshmallowQuestion() {
+  while (marshmallows !== 6 && guessesMarsh < 4) {
+    marshmallows = parseInt(prompt('How many standard-sized marshmallows can I fit in my mouth without chewing or swallowing?'));
+    // if it's too low
+    if (marshmallows < 6) {
+      alert('Come on. I can fit more than that. Try a higher number.');
+      guessesMarsh++;
+    // if it's too high
+    } else if (marshmallows > 6) {
+      alert('This is not worth dying over. Too high. Try a lower number.');
+      guessesMarsh++;
+    // if they type a word or enter nothing
+    } else if (isNaN(marshmallows) || marshmallows === null) {
+      alert('You\'ve gotta put a number in. Try again.');
+      guessesMarsh++;
+    }
+
+    // guessed right
+    if (marshmallows === 6) {
+      alert('Yes. Six marshmallows. No more, no less. Well, I mean, sure, I could fit fewer marshmallows in my mouth, but 6 is the most.');
+      correct++;
+      console.log('Correct:', correct);
+    }
+
+    // ran out of tries
+    if (guessesMarsh >= 4) {
+      alert('Time\'s up. You\'re out of tries. Incidentally, it was 6.');
+    }
   }
 
-  // guessed right
-  if (marshmallows === 6) {
-    alert('Yes. Six marshmallows. No more, no less. Well, I mean, sure, I could fit fewer marshmallows in my mouth, but 6 is the most.');
-    correct++;
-    console.log('Correct:', correct);
-  }
-
-  // ran out of tries
-  if (guessesMarsh >= 4) {
-    alert('Time\'s up. You\'re out of tries. Incidentally, it was 6.');
-  }
+  console.log('Marshmallow Guesses:', guessesMarsh);
 }
 
-console.log('Marshmallow Guesses:', guessesMarsh);
+marshmallowQuestion();
+// ask user to guess a number
+
+
+function countryQuestion() {
+  while (guessesCountry < 6 && flag === false) {
+    countryAnswer = prompt('Can you guess a country I haven\'t visited?');
+    for(var i = 0; i < countries.length; i++) {
+      console.log('each iteration:', countries[i]);
+      // check all countries to see if user guessed any of them
+      if (countryAnswer === countries[i]) {
+        alert('Nice job! I\'ve never been there.');
+        correct++;
+        flag = true;
+        console.log(flag);
+        break;
+      }
+    }
+
+    // if they didn't guess one of the countries, advance the guess counter
+    if (countryAnswer !== countries[i]) {
+      alert('Nope. I\'ve been there. Or you spelled the country wrong. Or you typed something in that isn\'t a country. Try again.');
+      guessesCountry++;
+    }
+
+    // ran out of guesses
+    if (guessesCountry >= 6) {
+      alert('You\'re out of guesses. Let\'s move on.');
+    }
+  }
+
+  console.log('Country Guesses:', guessesCountry);
+}
 
 // create a list of countries, a flag, a guess counter, and an answer variable
 var countries = ['Nigeria', 'Iran', 'Democratic Republic of the Congo', 'Ukraine', 'Algeria', 'Sudan', 'Uzbekistan', 'Angola', 'Nepal', 'Cameroon', 'Niger', 'Sri Lanka', 'Romania', 'Burkina Faso', 'Malawi', 'Senegal', 'Somalia', 'Chad', 'Guinea'];
@@ -157,34 +192,9 @@ var flag = false;
 var guessesCountry = 0;
 var countryAnswer;
 
+countryQuestion();
 // ask user to guess a country
-while (guessesCountry < 6 && flag === false) {
-  countryAnswer = prompt('Can you guess a country I haven\'t visited?');
-  for(var i = 0; i < countries.length; i++) {
-    console.log('each iteration:', countries[i]);
-    // check all countries to see if user guessed any of them
-    if (countryAnswer === countries[i]) {
-      alert('Nice job! I\'ve never been there.');
-      correct++;
-      flag = true;
-      console.log(flag);
-      break;
-    }
-  }
 
-  // if they didn't guess one of the countries, advance the guess counter
-  if (countryAnswer !== countries[i]) {
-    alert('Nope. I\'ve been there. Or you spelled the country wrong. Or you typed something in that isn\'t a country. Try again.');
-    guessesCountry++;
-  }
-
-  // ran out of guesses
-  if (guessesCountry >= 6) {
-    alert('You\'re out of guesses. Let\'s move on.');
-  }
-}
-
-console.log('Country Guesses:', guessesCountry);
 
 // using name, display number of right answers
 alert(yourName + ', you got ' + correct + ' out of 6 questions correct.');
